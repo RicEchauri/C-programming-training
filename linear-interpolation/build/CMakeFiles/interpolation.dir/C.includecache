@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/interpolation.h
+
+/home/ricardo/bosch/Trainings/linear-interpolation/src/main.c
+interpolation.h
+/home/ricardo/bosch/Trainings/linear-interpolation/src/interpolation.h
+stdio.h
+-
+

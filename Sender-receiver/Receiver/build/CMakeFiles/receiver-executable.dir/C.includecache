@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/receiver.h
+
+/home/ricardo/bosch/Sender-receiver/Receiver/src/main.c
+stdio.h
+-
+receiver.h
+/home/ricardo/bosch/Sender-receiver/Receiver/src/receiver.h
+
+/home/ricardo/bosch/Sender-receiver/Receiver/src/receiver.c
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+string.h
+-
+receiver.h
+/home/ricardo/bosch/Sender-receiver/Receiver/src/receiver.h
+

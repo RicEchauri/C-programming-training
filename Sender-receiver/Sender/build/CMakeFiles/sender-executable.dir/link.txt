@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/sender-executable.dir/src/main.c.o CMakeFiles/sender-executable.dir/src/sender.c.o  -o sender-executable 

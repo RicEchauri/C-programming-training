@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/interpolation.dir/src/main.c.o CMakeFiles/interpolation.dir/src/interpolation.c.o  -o interpolation 

@@ -1,0 +1,3 @@
+/home/ricardo/bosch/Sender-receiver/Receiver/build/CMakeFiles/rebuild_cache.dir
+/home/ricardo/bosch/Sender-receiver/Receiver/build/CMakeFiles/edit_cache.dir
+/home/ricardo/bosch/Sender-receiver/Receiver/build/CMakeFiles/receiver-executable.dir
