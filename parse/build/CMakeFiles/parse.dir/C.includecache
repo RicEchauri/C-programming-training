@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/parse.h
+stdio.h
+-
+
+/home/ricardo/Documents/C-programming-training/parse/src/parse.c
+parse.h
+/home/ricardo/Documents/C-programming-training/parse/src/parse.h
+stdio.h
+-
+stdlib.h
+-
+

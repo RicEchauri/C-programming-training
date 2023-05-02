@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/parse.dir/src/main.c.o CMakeFiles/parse.dir/src/parse.c.o  -o parse 

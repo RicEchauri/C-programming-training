@@ -1,8 +1,9 @@
-
+#include <stdio.h>
 #ifndef PARSE_H_
 #define PARSE_H_
 
 #define READ_BINARY "rb+"
+#define WRITE_BINARY "wb+"
 #define WRITE_TXT "w"
 #define FAIL_STATUS 1
 
@@ -36,7 +37,14 @@ typedef struct
     short datalength;
 }DATA_INFO;
 /////FUNCTIONS////////////////////
+void write_binary_from_stdin(void);
+void set_header(HEADER* header);
+void swap_header_endianness(HEADER* header);
+void swap_data_info_endianness(DATA_INFO* data);
+void set_data(DATA_INFO* data, FILE *binary_file, short id);
+void parse_binary_to_txt(char *input_file);
 void check_header(HEADER* header, int correct_magic_number);
-void swap_endiannes(void *ptr, char ptr_size);
+void check_data(DATA_INFO* data, FILE *binary_file);
+void swap_endiannes(void *ptr, long ptr_size);
 
 #endif 
