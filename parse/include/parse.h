@@ -7,7 +7,7 @@
 #define WRITE_TXT "w"
 #define FAIL_STATUS 1
 
-//////////ENDIANESS//////////////
+#define CORRECT_MAGIC_NUMBER 0xF00BAABE
 
 ///////VARIABLES TYPES///////////
 typedef enum
@@ -42,9 +42,9 @@ void set_header(HEADER* header);
 void swap_header_endianness(HEADER* header);
 void swap_data_info_endianness(DATA_INFO* data);
 void set_data(DATA_INFO* data, FILE *binary_file, short id);
-void parse_binary_to_txt(char *input_file);
+void parse_binary_to_txt(char *input_file, int magic_number);
 void check_header(HEADER* header, int correct_magic_number);
-void check_data(DATA_INFO* data, FILE *binary_file);
+void check_data(DATA_INFO* data, FILE *binary_file, FILE *text_file);
 void swap_endiannes(void *ptr, long ptr_size);
 
 #endif 

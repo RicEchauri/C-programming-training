@@ -35,7 +35,7 @@ void write_binary_from_stdin(void)
     }   
     fclose(binary_file);   
 }
-void parse_binary_to_txt(char *input_file)
+void parse_binary_to_txt(char *input_file, int magic_number)
 {
     FILE *binary_file;
     binary_file = fopen(input_file, READ_BINARY);
@@ -46,16 +46,25 @@ void parse_binary_to_txt(char *input_file)
         exit(FAIL_STATUS);
     }
 
+    FILE *text_file;
+    text_file = fopen("output_file.txt", WRITE_TXT);
+    if (text_file == NULL)
+    {
+        fprintf(stderr, "Error: Fail to create the file.");
+        exit(FAIL_STATUS);
+    }
+
     HEADER header;
     fread(&header, sizeof(HEADER), 1, binary_file);
-    check_header(&header, 0xF00DBABE);
+    check_header(&header, magic_number);
     DATA_INFO data[header.number_of_packages_received];
     for (char index_of_data = 0; index_of_data < header.number_of_packages_received; index_of_data++)
     {
         fread(&data[index_of_data], sizeof(DATA_INFO), 1, binary_file);
-        check_data(&data[index_of_data], binary_file);
+        check_data(&data[index_of_data], binary_file, text_file);
     }
     fclose(binary_file);  
+    fclose(text_file);
 }
 
 void check_header(HEADER* header, int correct_magic_number)
@@ -76,15 +85,9 @@ void check_header(HEADER* header, int correct_magic_number)
     fprintf(stdout, "Number of packages received = %x\n", header->number_of_packages_received);
     
 }
-void check_data(DATA_INFO* data, FILE *binary_file)
+void check_data(DATA_INFO* data, FILE *binary_file, FILE *text_file)
 {
-    FILE *text_file;
-    text_file = fopen("output_file.txt", WRITE_TXT);
-    if (text_file == NULL)
-    {
-        fprintf(stderr, "Error: Fail to create the file.");
-        exit(FAIL_STATUS);
-    }
+    
     swap_endiannes(&data->id, sizeof(data->id));
     swap_endiannes(&data->type, sizeof(data->type));
     swap_endiannes(&data->datalength, sizeof(data->datalength));
@@ -163,7 +166,6 @@ void check_data(DATA_INFO* data, FILE *binary_file)
         } 
     }
 
-    fclose(text_file);
 }
 void set_header(HEADER* header)
 {

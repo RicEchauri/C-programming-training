@@ -10,11 +10,9 @@
 stdio.h
 -
 
-/home/ricardo/Documents/C-programming-training/parse/src/parse.c
+/home/ricardo/Documents/C-programming-training/parse/src/main.c
 parse.h
 /home/ricardo/Documents/C-programming-training/parse/src/parse.h
 stdio.h
--
-stdlib.h
 -
 
