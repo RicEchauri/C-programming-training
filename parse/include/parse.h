@@ -7,7 +7,7 @@
 #define WRITE_TXT "w"
 #define FAIL_STATUS 1
 
-#define CORRECT_MAGIC_NUMBER 0xF00BAABE
+#define CORRECT_MAGIC_NUMBER 0xF00DBABE
 
 ///////VARIABLES TYPES///////////
 typedef enum
@@ -21,7 +21,14 @@ typedef enum
     ASCII_STRING,
     BINARY_DATA
 }DATA_TYPES;
-
+///////BINARY_TYPES///////////////
+typedef enum
+{
+    ONE_BYTE = 1,
+    TWO_BYTES = 2,
+    FOUR_BYTES = 4,
+    EIGTH_BYTES = 8,
+}BINARY_TYPES;
 ///////STRUCT FOR HEADER////////
 typedef struct
 {
@@ -46,5 +53,7 @@ void parse_binary_to_txt(char *input_file, int magic_number);
 void check_header(HEADER* header, int correct_magic_number);
 void check_data(DATA_INFO* data, FILE *binary_file, FILE *text_file);
 void swap_endiannes(void *ptr, long ptr_size);
+void string_to_binary(char *data_received, short datalength,  FILE *binary_file);
+void binary_to_string(short datalength, FILE *binary_file, FILE *text_file);
 
 #endif 
