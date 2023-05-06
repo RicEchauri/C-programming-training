@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/coin_state_machine.h
+
+/home/ricardo/Documents/C-programming-training/State_machine/src/coin_state_machine.c
+coin_state_machine.h
+/home/ricardo/Documents/C-programming-training/State_machine/src/coin_state_machine.h
+stdio.h
+-
+time.h
+-
+
+/home/ricardo/Documents/C-programming-training/State_machine/src/main.c
+coin_state_machine.h
+/home/ricardo/Documents/C-programming-training/State_machine/src/coin_state_machine.h
+

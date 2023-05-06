@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/state_machine.dir/src/main.c.o CMakeFiles/state_machine.dir/src/coin_state_machine.c.o  -o state_machine 

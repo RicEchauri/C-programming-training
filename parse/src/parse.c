@@ -14,19 +14,12 @@ char *data_types[] =
         "BINARY_DATA"};
 void write_binary_from_stdin(void)
 {
-    FILE *binary_file;
-    binary_file = fopen("data.bin", WRITE_BINARY);
-
-    if (binary_file == NULL)
-    {
-        fprintf(stderr, "Error: Fail to open the file.");
-        exit(FAIL_STATUS);
-    }
+    FILE *binary_file;                             //Create file descriptor for binary file
+    binary_file = check_file("data.bin", WRITE_BINARY); //Search for "data.bin" if this don't exist this will create it
 
     HEADER header;
-    set_header(&header);
-    fwrite(&header, sizeof(HEADER), 1, binary_file);
-    swap_header_endianness(&header);
+    set_header(&header, binary_file);
+  
     DATA_INFO data[header.number_of_packages_received];
     for (short index_of_data = 1; index_of_data <= header.number_of_packages_received; index_of_data++)
     {
@@ -37,40 +30,38 @@ void write_binary_from_stdin(void)
 void parse_binary_to_txt(char *input_file, int magic_number)
 {
     FILE *binary_file;
-    binary_file = fopen(input_file, READ_BINARY);
-
-    if (binary_file == NULL)
-    {
-        fprintf(stderr, "Error: Fail to open the file.");
-        exit(FAIL_STATUS);
-    }
+    binary_file = check_file(input_file, READ_BINARY);
 
     FILE *text_file;
-    text_file = fopen("output_file.txt", WRITE_TXT);
-    if (text_file == NULL)
+    text_file = check_file("output_file.txt", WRITE_TXT);
+
+    HEADER header;
+    check_header(&header, magic_number, binary_file);
+    
+    DATA_INFO data[header.number_of_packages_received];
+    for (char index_of_data = 0; index_of_data < header.number_of_packages_received; index_of_data++)
+    {
+        check_data(&data[index_of_data], binary_file, text_file);
+    }
+
+    fclose(binary_file);
+    fclose(text_file);
+}
+FILE *check_file(char *file_name, char *mode)
+{
+    FILE *file_to_check;
+    file_to_check = fopen(file_name, mode);
+    if (file_to_check == NULL)
     {
         fprintf(stderr, "Error: Fail to create the file.");
         exit(FAIL_STATUS);
     }
-
-    HEADER header;
-    fread(&header, sizeof(HEADER), 1, binary_file);
-    check_header(&header, magic_number);
-    DATA_INFO data[header.number_of_packages_received];
-    for (char index_of_data = 0; index_of_data < header.number_of_packages_received; index_of_data++)
-    {
-        fread(&data[index_of_data], sizeof(DATA_INFO), 1, binary_file);
-        check_data(&data[index_of_data], binary_file, text_file);
-    }
-    fclose(binary_file);
-    fclose(text_file);
+    return file_to_check;
 }
-
-void check_header(HEADER *header, int correct_magic_number)
+void check_header(HEADER *header, int correct_magic_number, FILE *binary_file)
 {
-    swap_endiannes(&header->magic_number, sizeof(header->magic_number));
-    swap_endiannes(&header->version_number, sizeof(header->version_number));
-    swap_endiannes(&header->number_of_packages_received, sizeof(header->number_of_packages_received));
+    fread(header, sizeof(HEADER), 1, binary_file);
+    swap_header_endianness(header);
 
     if (header->magic_number != correct_magic_number)
     {
@@ -78,21 +69,13 @@ void check_header(HEADER *header, int correct_magic_number)
         fprintf(stdout, "Magic number = %x\n", header->magic_number);
         exit(FAIL_STATUS);
     }
-
-    fprintf(stdout, "Magic number = %x\n", header->magic_number);
-    fprintf(stdout, "Version number = %x\n", header->version_number);
-    fprintf(stdout, "Number of packages received = %x\n", header->number_of_packages_received);
+    print_header(header);
 }
 void check_data(DATA_INFO *data, FILE *binary_file, FILE *text_file)
 {
-
-    swap_endiannes(&data->id, sizeof(data->id));
-    swap_endiannes(&data->type, sizeof(data->type));
-    swap_endiannes(&data->datalength, sizeof(data->datalength));
-
-    fprintf(stdout, "Data ID = %hx\n", data->id);
-    fprintf(stdout, "Data Type = %s\n", data_types[data->type]);
-    fprintf(stdout, "Datalength = %hx\n", data->datalength);
+    fread(data, sizeof(DATA_INFO), 1, binary_file);
+    swap_data_info_endianness(data);
+    print_data_info(data);
 
     DATA_TYPES type_of_data;
     type_of_data = (DATA_TYPES)data->type;
@@ -165,7 +148,7 @@ void check_data(DATA_INFO *data, FILE *binary_file, FILE *text_file)
     }
     }
 }
-void set_header(HEADER *header)
+void set_header(HEADER *header, FILE *binary_file)
 {
     fprintf(stdout, "Give me the magic number: ");
     scanf("%x", &header->magic_number);
@@ -173,15 +156,34 @@ void set_header(HEADER *header)
     scanf("%x", &header->version_number);
     fprintf(stdout, "Give me the number of packages: ");
     scanf("%x", &header->number_of_packages_received);
-    swap_endiannes(&header->magic_number, sizeof(header->magic_number));
-    swap_endiannes(&header->version_number, sizeof(header->version_number));
-    swap_endiannes(&header->number_of_packages_received, sizeof(header->number_of_packages_received));
+
+    swap_header_endianness(header);
+    fwrite(header, sizeof(HEADER), 1, binary_file);
+    swap_header_endianness(header);
 }
 void swap_header_endianness(HEADER *header)
 {
     swap_endiannes(&header->magic_number, sizeof(header->magic_number));
     swap_endiannes(&header->version_number, sizeof(header->version_number));
     swap_endiannes(&header->number_of_packages_received, sizeof(header->number_of_packages_received));
+}
+void swap_data_endianness(DATA_INFO* data)
+{
+    swap_endiannes(&data->id, sizeof(data->id));
+    swap_endiannes(&data->type, sizeof(data->type));
+    swap_endiannes(&data->datalength, sizeof(data->datalength));
+}
+void print_header(HEADER* header)
+{
+    fprintf(stdout, "Magic number = %x\n", header->magic_number);
+    fprintf(stdout, "Version number = %x\n", header->version_number);
+    fprintf(stdout, "Number of packages received = %x\n", header->number_of_packages_received);
+}
+void print_data_info(DATA_INFO* data)
+{
+    fprintf(stdout, "Data ID = %hx\n", data->id);
+    fprintf(stdout, "Data Type = %s\n", data_types[data->type]);
+    fprintf(stdout, "Datalength = %hx\n", data->datalength);
 }
 void swap_data_info_endianness(DATA_INFO *data)
 {
@@ -522,4 +524,17 @@ void swap_endiannes(void *ptr, long ptr_size)
         *((char *)ptr + index) = *temp_byte;
     }
     free(temp_byte);
+}
+void check_data2(DATA_INFO *data, FILE *binary_file, FILE *text_file)
+{
+    fread(data, sizeof(DATA_INFO), 1, binary_file);
+    swap_data_info_endianness(data);
+    print_data_info(data);
+    
+    void *data_received;
+    data_received = malloc((size_t)&data->datalength);
+    fread(&data_received,(size_t)&data->datalength, 1, binary_file);
+    fwrite(&data_received, (size_t)&data->datalength, 1, text_file);
+    free(data_received);
+
 }

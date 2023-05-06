@@ -45,15 +45,19 @@ typedef struct
 }DATA_INFO;
 /////FUNCTIONS////////////////////
 void write_binary_from_stdin(void);
-void set_header(HEADER* header);
+FILE *check_file(char *file_name, char *mode);
+void set_header(HEADER *header, FILE *binary_file);
 void swap_header_endianness(HEADER* header);
 void swap_data_info_endianness(DATA_INFO* data);
 void set_data(DATA_INFO* data, FILE *binary_file, short id);
 void parse_binary_to_txt(char *input_file, int magic_number);
-void check_header(HEADER* header, int correct_magic_number);
+void check_header(HEADER *header, int correct_magic_number, FILE *binary_file);
 void check_data(DATA_INFO* data, FILE *binary_file, FILE *text_file);
 void swap_endiannes(void *ptr, long ptr_size);
 void string_to_binary(char *data_received, short datalength,  FILE *binary_file);
 void binary_to_string(short datalength, FILE *binary_file, FILE *text_file);
+void print_header(HEADER* header);
+void print_data_info(DATA_INFO* data);
+void check_data2(DATA_INFO *data, FILE *binary_file, FILE *text_file);
 
 #endif 

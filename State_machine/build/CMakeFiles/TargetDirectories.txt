@@ -1,0 +1,3 @@
+/home/ricardo/Documents/C-programming-training/State_machine/build/CMakeFiles/rebuild_cache.dir
+/home/ricardo/Documents/C-programming-training/State_machine/build/CMakeFiles/edit_cache.dir
+/home/ricardo/Documents/C-programming-training/State_machine/build/CMakeFiles/state_machine.dir
