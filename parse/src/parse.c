@@ -150,6 +150,7 @@ void check_data(DATA_INFO *data, FILE *binary_file, FILE *text_file)
 }
 void set_header(HEADER *header, FILE *binary_file)
 {
+
     fprintf(stdout, "Give me the magic number: ");
     scanf("%x", &header->magic_number);
     fprintf(stdout, "Give me the version number: ");
