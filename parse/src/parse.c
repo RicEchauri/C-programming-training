@@ -41,11 +41,35 @@ void parse_binary_to_txt(char *input_file, int magic_number)
     DATA_INFO data[header.number_of_packages_received];
     for (char index_of_data = 0; index_of_data < header.number_of_packages_received; index_of_data++)
     {
-        check_data(&data[index_of_data], binary_file, text_file);
+        add_data(&data[index_of_data], binary_file, text_file);
     }
 
     fclose(binary_file);
     fclose(text_file);
+}
+void add_data_to_binary(char *input_file, int magic_number)
+{
+    FILE *binary_file;                             
+    binary_file = check_file(input_file, WRITE_BINARY); 
+
+    HEADER header;
+    check_header(&header, magic_number, binary_file);
+    
+    int n_data = n_data_to_add();
+    header.number_of_packages_received += n_data;
+    DATA_INFO data[n_data];
+    for (short index_of_data = 1; index_of_data <= header.number_of_packages_received; index_of_data++)
+    {
+        set_data(&data[index_of_data], binary_file, index_of_data);
+    }
+    fclose(binary_file);
+}
+int n_data_to_add(void)
+{
+    int n_data;
+    fprintf(stdout, "How many data do you want to add");
+    scanf(" %d", &n_data);
+    return n_data;
 }
 FILE *check_file(char *file_name, char *mode)
 {
@@ -71,7 +95,7 @@ void check_header(HEADER *header, int correct_magic_number, FILE *binary_file)
     }
     print_header(header);
 }
-void check_data(DATA_INFO *data, FILE *binary_file, FILE *text_file)
+void add_data(DATA_INFO *data, FILE *binary_file, FILE *text_file)
 {
     fread(data, sizeof(DATA_INFO), 1, binary_file);
     swap_data_info_endianness(data);
