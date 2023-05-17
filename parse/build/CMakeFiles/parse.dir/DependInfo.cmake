@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/home/ricardo/Documents/C-programming-training/parse/src/main.c" "/home/ricardo/Documents/C-programming-training/parse/build/CMakeFiles/parse.dir/src/main.c.o"
   "/home/ricardo/Documents/C-programming-training/parse/src/parse.c" "/home/ricardo/Documents/C-programming-training/parse/build/CMakeFiles/parse.dir/src/parse.c.o"
+  "/home/ricardo/Documents/C-programming-training/parse/src/tools.c" "/home/ricardo/Documents/C-programming-training/parse/build/CMakeFiles/parse.dir/src/tools.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

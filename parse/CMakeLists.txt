@@ -6,4 +6,5 @@ add_executable(
     parse #binario
     src/main.c
     src/parse.c
+    src/tools.c
 )

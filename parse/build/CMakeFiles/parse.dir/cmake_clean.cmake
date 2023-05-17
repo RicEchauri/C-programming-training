@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/parse.dir/src/main.c.o"
   "CMakeFiles/parse.dir/src/parse.c.o"
+  "CMakeFiles/parse.dir/src/tools.c.o"
   "parse"
   "parse.pdb"
 )

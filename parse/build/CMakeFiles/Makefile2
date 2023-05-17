@@ -94,12 +94,12 @@ clean: CMakeFiles/parse.dir/clean
 CMakeFiles/parse.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ricardo/Documents/C-programming-training/parse/build/CMakeFiles --progress-num=1,2,3 "Built target parse"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ricardo/Documents/C-programming-training/parse/build/CMakeFiles --progress-num=1,2,3,4 "Built target parse"
 .PHONY : CMakeFiles/parse.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/parse.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ricardo/Documents/C-programming-training/parse/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ricardo/Documents/C-programming-training/parse/build/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/parse.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ricardo/Documents/C-programming-training/parse/build/CMakeFiles 0
 .PHONY : CMakeFiles/parse.dir/rule

@@ -7,3 +7,6 @@ CMakeFiles/parse.dir/src/main.c.o
 CMakeFiles/parse.dir/src/parse.c.o
  ../include/parse.h
  /home/ricardo/Documents/C-programming-training/parse/src/parse.c
+CMakeFiles/parse.dir/src/tools.c.o
+ ../include/parse.h
+ /home/ricardo/Documents/C-programming-training/parse/src/tools.c

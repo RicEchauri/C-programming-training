@@ -197,6 +197,33 @@ src/parse.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/src/parse.c.s
 .PHONY : src/parse.c.s
 
+src/tools.o: src/tools.c.o
+
+.PHONY : src/tools.o
+
+# target to build an object file
+src/tools.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/src/tools.c.o
+.PHONY : src/tools.c.o
+
+src/tools.i: src/tools.c.i
+
+.PHONY : src/tools.i
+
+# target to preprocess a source file
+src/tools.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/src/tools.c.i
+.PHONY : src/tools.c.i
+
+src/tools.s: src/tools.c.s
+
+.PHONY : src/tools.s
+
+# target to generate assembly for a file
+src/tools.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/parse.dir/build.make CMakeFiles/parse.dir/src/tools.c.s
+.PHONY : src/tools.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -212,6 +239,9 @@ help:
 	@echo "... src/parse.o"
 	@echo "... src/parse.i"
 	@echo "... src/parse.s"
+	@echo "... src/tools.o"
+	@echo "... src/tools.i"
+	@echo "... src/tools.s"
 .PHONY : help
 
 
